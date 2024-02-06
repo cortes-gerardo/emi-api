@@ -40,4 +40,25 @@ class CalculatorControllerIntegrationTest {
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.success").value(true));
     }
+    @Test
+    @SneakyThrows
+    void whenGivenAnInvalidInput_thenReturnsUnprocessableEntity() {
+        // given
+        MockHttpServletRequestBuilder requestBuilder = post("/v1/calculator/emi")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJson(new EmiArguments(BigInteger.valueOf(-1), 101, 31)));
+
+        //when
+        ResultActions resultActions = mockMvc.perform(requestBuilder);
+
+        // then
+        resultActions
+                .andExpect(status().isUnprocessableEntity())
+                .andExpect(jsonPath("$.success").value(false))
+                .andExpect(jsonPath("$.violations.yearlyInterestRate").value("should not exceed 100"))
+                .andExpect(jsonPath("$.violations.loanTerm").value("should not exceed 30"))
+                .andExpect(jsonPath("$.violations.loanValue").value("must be greater than 0"));
+    }
+
+
 }
