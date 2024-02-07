@@ -1,13 +1,10 @@
 package com.gerardocortes.emiapi.controller;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.math.BigInteger;
+import java.math.BigDecimal;
 
 @Data
 @AllArgsConstructor
@@ -15,12 +12,14 @@ public final class EmiArguments {
 
     @NotNull
     @Positive
-    private final BigInteger loanValue;
+    @Digits(integer=8, fraction=2)
+    private final BigDecimal loanValue;
 
     @NotNull
     @PositiveOrZero
     @Max(value = 100, message = "should not exceed 100")
-    private final Integer yearlyInterestRate;
+    @Digits(integer=3, fraction=2)
+    private final Double yearlyInterestRate;
 
     @NotNull
     @PositiveOrZero

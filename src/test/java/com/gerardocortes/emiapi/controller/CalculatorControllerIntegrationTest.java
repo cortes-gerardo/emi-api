@@ -10,7 +10,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
-import java.math.BigInteger;
+import java.math.BigDecimal;
 
 import static com.gerardocortes.emiapi.util.JsonHelper.asJson;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -30,7 +30,7 @@ class CalculatorControllerIntegrationTest {
         // given
         MockHttpServletRequestBuilder requestBuilder = post("/v1/calculator/emi")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(asJson(new EmiArguments(BigInteger.valueOf(1000), 100, 30)));
+                .content(asJson(new EmiArguments(BigDecimal.valueOf(100.00), 10.50, 10)));
 
         //when
         ResultActions resultActions = mockMvc.perform(requestBuilder);
@@ -46,7 +46,7 @@ class CalculatorControllerIntegrationTest {
         // given
         MockHttpServletRequestBuilder requestBuilder = post("/v1/calculator/emi")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(asJson(new EmiArguments(BigInteger.valueOf(-1), 101, 31)));
+                .content(asJson(new EmiArguments(BigDecimal.valueOf(-1.00), 101.00, 31)));
 
         //when
         ResultActions resultActions = mockMvc.perform(requestBuilder);

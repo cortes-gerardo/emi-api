@@ -1,7 +1,9 @@
 package com.gerardocortes.emiapi.controller;
 
-public record ResultResponse(Boolean success, Integer value) implements Response {
-    ResultResponse(Integer value) {
+import java.math.BigDecimal;
+
+public record ResultResponse(Boolean success, BigDecimal value) implements Response {
+    ResultResponse(BigDecimal value) {
         this(true, value);
     }
 }
