@@ -21,6 +21,7 @@ public class CalculatorController {
         this.service = service;
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(value= "/emi")
     public ResponseEntity<ResultResponse> calculate(@Valid @RequestBody EmiArguments emiArguments) {
         return ResponseEntity
@@ -28,6 +29,7 @@ public class CalculatorController {
                 .body(new ResultResponse(service.calculate(emiArguments.getLoanValue(), emiArguments.getYearlyInterestRate(), emiArguments.getLoanTerm())));
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(value = "/history")
     public ResponseEntity<List<BigDecimal>> history() {
         return ResponseEntity
