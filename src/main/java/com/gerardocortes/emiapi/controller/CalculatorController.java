@@ -31,9 +31,9 @@ public class CalculatorController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(value = "/history")
-    public ResponseEntity<List<BigDecimal>> history() {
+    public ResponseEntity<HistoryResponse> history() {
         return ResponseEntity
-                .ok(service.history());
+                .ok(new HistoryResponse(service.history()));
     }
 
 }

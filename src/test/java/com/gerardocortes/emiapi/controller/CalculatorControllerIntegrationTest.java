@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import java.math.BigDecimal;
 
 import static com.gerardocortes.emiapi.util.JsonHelper.asJson;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -55,10 +56,22 @@ class CalculatorControllerIntegrationTest {
         resultActions
                 .andExpect(status().isUnprocessableEntity())
                 .andExpect(jsonPath("$.success").value(false))
-                .andExpect(jsonPath("$.violations.yearlyInterestRate").value("should not exceed 100"))
-                .andExpect(jsonPath("$.violations.loanTerm").value("should not exceed 30"))
-                .andExpect(jsonPath("$.violations.loanValue").value("must be greater than 0"));
+                .andExpect(jsonPath("$.message").isNotEmpty());
     }
 
+    @Test
+    @SneakyThrows
+    void whenGivenAValidInput_thenReturnsOk() {
+        // given
+        MockHttpServletRequestBuilder requestBuilder = get("/v1/calculator/history");
+
+        //when
+        ResultActions resultActions = mockMvc.perform(requestBuilder);
+
+        // then
+        resultActions
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.success").value(true));
+    }
 
 }

@@ -12,7 +12,7 @@ public final class EmiArguments {
 
     @NotNull
     @Positive
-    @Digits(integer=8, fraction=2)
+    @Digits(integer=19, fraction=2)
     private final BigDecimal loanValue;
 
     @NotNull
@@ -24,6 +24,7 @@ public final class EmiArguments {
     @NotNull
     @PositiveOrZero
     @Max(value = 30, message = "should not exceed 30")
+    @Digits(integer=2, fraction=0)
     private final Integer loanTerm;
 
 }
