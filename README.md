@@ -4,6 +4,10 @@ _Equated Monthly Installment calculator Backend_
 ## Description
 API that takes a request with loan value, interest rate and loan term and calculates the equated monthly installment
 
+This application is designed to run with EMI-UI, you can run it locally by following the steps in [Run](#run)
+
+Once the application is running you can check the live documentation here http://127.0.0.1:8080/swagger-ui/index.html
+
 ---
 
 # Local Development

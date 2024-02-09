@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class EmiServiceTest {
 
@@ -17,4 +18,13 @@ class EmiServiceTest {
 
         assertEquals(BigDecimal.valueOf(134_935).setScale(2, RoundingMode.HALF_UP), emi);
     }
+
+
+    @Test
+    void whenGivenAnInvalidCase_thenThrowException() {
+        assertThrows(ArithmeticException.class, () -> {
+            service.calculate(BigDecimal.valueOf(10_000_000.00), 0.0, 10);
+        });
+    }
+
 }
