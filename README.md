@@ -38,6 +38,16 @@ $ ./mvnw clean install
 $ java -jar target/emi-api-0.0.1-SNAPSHOT.jar
 ```
 
+## Deploy
+You can build a docker image and run it locally by using the following
+```shell
+# builds the image
+$ docker build -t emi-api .
+
+# runs it locally in port 8080
+$ docker run -d -p 8080:8080 emi-api:latest
+```
+
 ---
 
 # Authors
